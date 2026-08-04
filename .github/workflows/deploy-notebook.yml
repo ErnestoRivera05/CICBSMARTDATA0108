@@ -15,8 +15,8 @@ jobs:
     
     - name: Export multiple notebooks (raw)
       run: |
-        DEST_HOST="${{ secrets.DATABRICKS_DEST_HOST_1 }}"
-        DEST_TOKEN="${{ secrets.DATABRICKS_DEST_TOKEN_1 }}"
+        ORIGIN_HOST="${{ secrets.DATABRICKS_ORIGIN_HOST }}"
+        ORIGIN_TOKEN="${{ secrets.DATABRICKS_ORIGIN_TOKEN }}"
         NOTEBOOK_BASE="/Workspace/Users/ernestosanabria07@hotmail.com/CICBSMARTDATA0108/proceso"
         NOTEBOOKS=("1.Preparacion_Ambiente" "2.Ingest_circuits_data" "2.Ingest_Constructors" "2.Ingest_racing_data" "3.Transform" "4.Load" "5.Grants_Medallion")
         mkdir -p notebooks_to_deploy
@@ -69,7 +69,7 @@ jobs:
           "$DEST_HOST/api/2.1/jobs/list")
         
         # Extraer job_id si existe el workflow
-        existing_job_id=$(echo "$workflows_response" | jq -r --arg name "$WORKFLOW_NAME" '.jobs[]? | select(.settings.name == $name) | .job_id')
+        existing_job_id=$(echo "$workflows_response" | jq -r --arg name "$WORKFLOW_NAME" '.jobs[]? | select(.settings.name == $name) | .job_id' | tr -d '\r')
         
         if [ "$existing_job_id" != "" ] && [ "$existing_job_id" != "null" ]; then
           echo "Workflow encontrado con ID: $existing_job_id. Eliminando..."
@@ -224,7 +224,7 @@ jobs:
                 "custom_tags": {
                   "environment": "production",
                   "team": "data-engineering"
-                },
+                }
               }
             }
           ],
@@ -290,7 +290,7 @@ jobs:
           -H "Authorization: Bearer $DEST_TOKEN" \
           "$DEST_HOST/api/2.1/jobs/list")
         
-        job_id=$(echo "$workflows_list" | jq -r --arg name "$WORKFLOW_NAME" '.jobs[]? | select(.settings.name == $name) | .job_id')
+        job_id=$(echo "$workflows_list" | jq -r --arg name "$WORKFLOW_NAME" '.jobs[]? | select(.settings.name == $name) | .job_id' | tr -d '\r')
         
         if [ "$job_id" != "" ] && [ "$job_id" != "null" ]; then
           echo "Workflow encontrado con ID: $job_id"
