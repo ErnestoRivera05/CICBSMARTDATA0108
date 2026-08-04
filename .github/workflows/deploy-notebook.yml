@@ -35,8 +35,8 @@ jobs:
 
     - name: Deploy notebooks to Destination Workspace
       run: |
-        DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST }}
-        DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}
+        DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST_1 }}
+        DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN_1 }}
         DEST_BASE="/py"
 
         for file in notebooks_to_deploy/*.py; do
