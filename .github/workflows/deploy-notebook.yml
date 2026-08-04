@@ -18,8 +18,8 @@ jobs:
 
     - name: Export multiple notebooks (raw)
       run: |
-        ORIGIN_HOST=${{ secrets.DATABRICKS_ORIGIN_HOST }}
-        ORIGIN_TOKEN=${{ secrets.DATABRICKS_ORIGIN_TOKEN }}
+        ORIGIN_HOST="${{ secrets.DATABRICKS_ORIGIN_HOST }}"
+        ORIGIN_TOKEN="${{ secrets.DATABRICKS_ORIGIN_TOKEN }}"
         NOTEBOOK_BASE="/Workspace/Users/ernestosanabria07@hotmail.com/CICBSMARTDATA0108/proceso"
         NOTEBOOKS=("1.Preparacion_Ambiente" "2.Ingest_circuits_data" "2.Ingest_Constructors" "2.Ingest_racing_data" "3.Transform" "4.Load" "5.Grants_Medallion") 
 
@@ -35,8 +35,8 @@ jobs:
 
     - name: Deploy notebooks to Destination Workspace
       run: |
-        DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST_1 }}
-        DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN_1 }}
+        DEST_HOST="${{ secrets.DATABRICKS_DEST_HOST_1 }}"
+        DEST_TOKEN="${{ secrets.DATABRICKS_DEST_TOKEN_1 }}"
         DEST_BASE="/py"
 
         for file in notebooks_to_deploy/*.py; do
