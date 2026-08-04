@@ -124,7 +124,7 @@ jobs:
         cat > workflow_config.json << EOF
         {
           "name": "WF_ADB",
-          "format": "MULTI_TASK",
+          "format": "MULTI_task",
           "tasks": [
             {
               "task_key": "tarea1_notebook1",
