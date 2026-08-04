@@ -30,8 +30,8 @@ jobs:
     
     - name: Deploy notebooks to Destination Workspace
       run: |
-        DEST_HOST="${{ secrets.DATABRICKS_DEST_HOST_1 }}"
-        DEST_TOKEN="${{ secrets.DATABRICKS_DEST_TOKEN_1 }}"
+       DEST_HOST="${{ secrets.DATABRICKS_DEST_HOST_1 }}"
+       DEST_TOKEN="${{ secrets.DATABRICKS_DEST_TOKEN_1 }}"
         DEST_BASE="/smartdata"
         for file in notebooks_to_deploy/*.py; do
           name=$(basename "$file" .py)
