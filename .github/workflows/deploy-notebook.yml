@@ -87,7 +87,7 @@ jobs:
       run: |
         DEST_HOST="${{ secrets.DATABRICKS_DEST_HOST_1 }}"
         DEST_TOKEN="${{ secrets.DATABRICKS_DEST_TOKEN_1 }}"
-        CLUSTER_NAME="Cluster_SD"
+        CLUSTER_NAME="cluster_SD"
         
         echo "Buscando cluster existente: $CLUSTER_NAME"
         
